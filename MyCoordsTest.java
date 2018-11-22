@@ -29,13 +29,38 @@ public class MyCoordsTest {
 	@Test
 	public void testDistance3d() {
 		Point3D gps0=new Point3D(32.103315,35.209039,670.0);
-		Point3D gps1=new Point3D(32.106352 ,35.205808194261195 ,650.0);
+		Point3D gps1=new Point3D(32.106352 ,35.205225 ,650.0);
 
 		double dis=coo.distance3d(gps0, gps1);
-		System.out.println("the dis in meter: "+dis);
-		assertEquals(dis,"493.0523318");
+		
+		//System.out.println("the dis in meter: "+dis);
+		double exepted= 493.05233;
+		assertEquals(dis,exepted,0.00001);
 
 	}
+	
+	@Test
+	public void testVector3D() {
+		Point3D gps0=new Point3D(32.103315,35.209039,670.0);
+		Point3D gps1=new Point3D(32.106352 ,35.205225 ,650.0);
+
+		Point3D Vector3D=coo.vector3D(gps1, gps0);
+		//System.out.println("the Vector3D in meter: "+Vector3D.toString());
+		Point3D expected_point= new Point3D(337.6989920612287,-359.24920673378745,-20.0);
+		assertEquals(Vector3D.toString(),expected_point.toString());
+
+	}
+	
+	@Test
+	public void isValid_GPS_Point() {
+		Point3D gps0=new Point3D(32.103315,35.209039,670.0);
+		assertTrue(coo.isValid_GPS_Point(gps0));
+		
+	}
+	
+	
+	
+	
 	
 //	int a,b;
 //	a=1;
