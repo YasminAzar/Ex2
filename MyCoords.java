@@ -35,7 +35,8 @@ public class MyCoords implements coords_converter {
 	public double distance3d(Point3D gps0, Point3D gps1) {
 		
 		double R=6371000; //Radios of earth in meter
-		double Lon_Norm=0.847091174;
+		double Lon_Norm=Math.cos(Math.toRadians(gps0.x()));
+;
 		double disLat=(gps0.x()*Math.PI/180)-(gps1.x()*Math.PI/180);
 		double disLon=(gps0.y()*Math.PI/180)-(gps1.y()*Math.PI/180);
 //		System.out.println("The disLat is: "+disLat);
