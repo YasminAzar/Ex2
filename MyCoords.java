@@ -34,7 +34,7 @@ public class MyCoords implements coords_converter {
 	@Override
 	public double distance3d(Point3D gps0, Point3D gps1) {
 		
-		float R=6371000; //Radios of earth in meter
+		double R=6371000; //Radios of earth in meter
 		double Lon_Norm=0.847091174;
 		double disLat=(gps0.x()*Math.PI/180)-(gps1.x()*Math.PI/180);
 		double disLon=(gps0.y()*Math.PI/180)-(gps1.y()*Math.PI/180);
@@ -68,8 +68,29 @@ public class MyCoords implements coords_converter {
 
 	@Override
 	public double[] azimuth_elevation_dist(Point3D gps0, Point3D gps1) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		double azimuth=0;
+		double diff_Lat=gps1.x()-gps0.x();
+		double diff_Lon=gps1.y()-gps0.y();
+	    azimuth=Math.atan2(diff_Lat,diff_Lon);
+	    azimuth=Math.toDegrees(azimuth);
+	    if(diff_Lat<0) azimuth=180-azimuth;
+		if(diff_Lat<0 && diff_Lon<0) azimuth=180+azimuth;
+		if(diff_Lon<0) azimuth=360-azimuth;
+//	    System.out.println("The azimuth angel is: "+azimuth);
+		
+	    double dz=gps1.z()-gps0.z();
+	    double elevation_in_rad=Math.atan2(distance3d(gps0,gps1), dz);
+	    double elevation_in_deg=Math.toDegrees(elevation_in_rad);
+//	    System.out.println("The elevation angel is: "+elevation_in_deg);
+
+	    double dxy=distance3d(gps0,gps1)*distance3d(gps0,gps1);
+	    double dist=Math.sqrt(dxy*dxy+dz*dz);
+//	    System.out.println("The distance is: "+dist);
+
+		double [] azimuth_elevation_dist= {azimuth,elevation_in_deg,dist};
+
+		return azimuth_elevation_dist;
 	}
 
 	@Override
