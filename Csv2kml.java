@@ -8,24 +8,32 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class Csv2kml {
+	
+	/**
+	 * create kml file from csv file.
+	 * base on: https://stackoverflow.com/questions/18725039/java-create-a-kml-file-and-insert-elements-in-existing-file 
+	 * @param args
+	 * @throws IOException
+	 */
 
 	public static void main(String[] args) throws IOException
 	{
 
-		String csvFile = "data1.csv";
+		String csvFile = "data1.csv"; //Read from this file
 		String line = "";
 		String cvsSplitBy = ",";
 		System.out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"+ 
 				"<kml xmlns=\"http://www.opengis.net/kml/2.2\">\n");
 
+		//try and catch for the reading part
 		try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) 
 		{
 			br.readLine();
 			br.readLine();
 
-			while ((line = br.readLine()) != null) 
+			while ((line = br.readLine()) != null) //If the third line in the read file is not empty, read from it
 			{
-				String[] userInfo = line.split(cvsSplitBy);
+				String[] userInfo = line.split(cvsSplitBy); //userInfo is an array of all the information in a row
 
 				System.out.println("MAC: " + userInfo[0] + " , SSID: " + userInfo[1] +
 						" ,AuthMode: " + userInfo[2] + " ,FirstSeen: " + " ,Channel: "+ userInfo[4]+
@@ -38,7 +46,7 @@ public class Csv2kml {
 			e.printStackTrace();
 		}
 
-		String fileName = "data1.kml";
+		String fileName = "data1.kml"; //write to this file
 		String kmlstart="<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"+ 
 				"<kml xmlns=\"http://www.opengis.net/kml/2.2\">\n";
 		PrintWriter pw =null;
@@ -48,7 +56,7 @@ public class Csv2kml {
 		String kmldoc="<Document>";
 		String sb1 = new String();
 		
-
+		//try and catch for the writing part
 		try 
 		{
 			pw = new PrintWriter(kmlFile);
