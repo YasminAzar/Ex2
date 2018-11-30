@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class Csv2kml {
-	
+
 	/**
 	 * create kml file from csv file.
 	 * base on: https://stackoverflow.com/questions/18725039/java-create-a-kml-file-and-insert-elements-in-existing-file 
@@ -31,7 +31,7 @@ public class Csv2kml {
 			br.readLine();
 			br.readLine();
 
-			while ((line = br.readLine()) != null) //If the third line in the read file is not empty, read from it
+			while ((line = br.readLine()) != null) //if the third line in the read file is not empty, read from it
 			{
 				String[] userInfo = line.split(cvsSplitBy); //userInfo is an array of all the information in a row
 
@@ -55,7 +55,7 @@ public class Csv2kml {
 		String kmlend="</kml>";
 		String kmldoc="<Document>";
 		String sb1 = new String();
-		
+
 		//try and catch for the writing part
 		try 
 		{
